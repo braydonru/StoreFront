@@ -142,15 +142,28 @@ class ApiClient {
   }
 
   async setUserRole(id: number, role: string) {
-    return this.request(`/users/set_role?role=${role}&id=${id}`, {
+    const res = await fetch(`${API_BASE_URL}/users/set_role?role=${role}&id=${id}`, {
       method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.token}`,
+      }
     });
   }
 
   async deleteUser(id: number) {
-    return this.request(`/users/delete_user?id=${id}`, {
-      method: "DELETE",
-    });
+    try{
+      const deleted = await fetch(`${API_BASE_URL}/users/delete_user?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${this.token}`,
+        }
+      })
+    }
+    catch(error) {
+      console.error(error);
+    }
   }
 
   // Stores
@@ -269,8 +282,13 @@ class ApiClient {
   }
 
   async deleteProduct(id: number): Promise<void> {
-    // This would be the actual API call
-    return;
+    const res = await fetch(`${API_BASE_URL}/product/delete_product?product_id=${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.token}`,
+      }
+    })
   }
 }
 

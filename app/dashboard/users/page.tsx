@@ -33,6 +33,7 @@ export default function UsersPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -130,6 +131,7 @@ export default function UsersPage() {
   }
 
   return (
+
     <div className="p-8">
       <div className="flex items-center justify-between mb-8">
         <div>
@@ -221,6 +223,7 @@ export default function UsersPage() {
                             className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors"
                             title="Eliminar usuario"
                           >
+
                             <Trash2 className="w-4 h-4" />
                           </button>
                         )}
@@ -384,7 +387,7 @@ export default function UsersPage() {
                       <p className="font-medium text-foreground">{role}</p>
                       <p className="text-sm text-muted-foreground">
                         {role === "Admin"
-                          ? "Acceso completo al sistema"
+                          ? "Acceso completo a la tienda"
                           : "Acceso limitado a tiendas asignadas"}
                       </p>
                     </div>

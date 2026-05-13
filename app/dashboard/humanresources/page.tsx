@@ -37,6 +37,16 @@ export default function HRPage ()  {
         fetchUsersByStore();
     }, [selectedStore?.id]);
 
+    const handleDelete = async (id: number) => {
+        if (!confirm("Estas seguro de eliminar este Trabajador?")) return;
+
+        try {
+            await apiClient.deleteUser(id);
+            setUserslist(userslist.filter((u) => u.id !== id));
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    };
 
     const handleOpenModal = (user?: User) => {
         if (user) {
@@ -76,7 +86,7 @@ export default function HRPage ()  {
             };
 
             const newUser = await apiClient.createWorker(userData);
-            setUser([...user,newUser]);
+            setUserslist([...userslist,newUser]);
 
             handleCloseModal();
         } catch (error) {
@@ -144,13 +154,18 @@ export default function HRPage ()  {
                                         <div className="flex items-center gap-2">
                                             <button className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors">
                                             </button>
-                                            <button className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
+                                            <button
+                                                onClick={()=>handleDelete(u.id)}
+                                                className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-colors">
                                                 <Trash2 className="w-4 h-4" />
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-                        ))}
+
+                            )
+                        )
+                        }
                         </tbody>
                     </table>
                 </div>

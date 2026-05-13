@@ -39,7 +39,7 @@ export default function ProductsPage() {
         setIsLoading(true);
         const fetchedProducts = await apiClient.getProducts(selectedStore.id);
         setProducts(fetchedProducts);
-        setFilteredProducts(fetchedProducts);
+
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -97,6 +97,8 @@ export default function ProductsPage() {
       stock: "",
     });
   };
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
